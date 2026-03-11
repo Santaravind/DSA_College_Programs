@@ -14,6 +14,7 @@ void insert_last();
 void insert_First();
 void deleteFirst();
 void deleteLast();
+void delete_To_Give_Node();
 
 int main(){
 
@@ -27,16 +28,19 @@ int main(){
     printf("Enter 2 if want to  insert element in first position \n");
     printf("Enter 3 if want to  insert element in last position\n");
     printf("Enter 4 if want to  insert element in between position\n");
-    printf("Enter 5 to print backword list \n");
-    printf("Enter 6 to print forword list \n");
-    printf("Enter your choice \t:");
+    printf("Enter 5 if want to  delete element in first position \n");
+    printf("Enter 6 if want to  delete element in last position\n");
+    printf("Enter 7 if want to  delete element in given possion\n");
+    printf("Enter 8 to print forword list \n");
+    printf("Enter 9 to print backword  list \n");
+    printf("Enter your choice: ");
     scanf("%d",&x);
 
     switch(x){
         case 1:
         create();
         break;
-   case 2:
+       case 2:
         insert_First();
         break;
         case 3:
@@ -46,19 +50,29 @@ int main(){
         insertinbetween();
         break;
         case 5:
-        taverse_backword();
-        break ;
+        deleteFirst();
+        break;
         case 6:
+        deleteLast();
+        break;
+        case 7:
+        delete_To_Give_Node();
+        break;
+        case 8:
         taverse_forword();
+        break ;
+        case 9:
+        taverse_backword();
+       
         break ;
 
 
         default :
-        printf("You enter wrong choice \t");
+        printf("You are Enter wrong choice:---");
 
 
     }
-    printf("\nDo you want to  continue to press yes Y or y other wish N\t:");
+    printf("\nDo you want to  continue to press yes Y or y other wish N: ");
     scanf(" %c",&ch);
 
 }while(ch=='y'||ch=='Y');
@@ -105,7 +119,7 @@ void taverse_backword(){
     }
      printf("List items forword \t");
     while(p!=NULL){
-        printf("%d\t",p->info);
+        printf("%d->",p->info);
         p=p->pre;
     }
 
@@ -118,9 +132,9 @@ void taverse_forword(){
     if(last==NULL){
         printf("Node list not exixt ");
     }
-     printf("List items backword \t");
+     printf("List items forword \t");
     while(p!=NULL){
-        printf("%d\t",p->info);
+        printf("%d->",p->info);
         p=p->next;
     }
 }
@@ -200,6 +214,96 @@ void insertinbetween(){
         q->next->pre=q;
     }
 
+
+}
+
+void deleteFirst(){
+    struct node *p;
+
+    p=first;
+    if(first==NULL){
+         printf("Node not exits\t");
+         return;
+    }
+    if(first==last){
+        first=NULL;
+        last=NULL;
+        
+    }else{
+      first= first->next;
+        first->pre=NULL;
+    }
+    printf("Deleted node is:\t %d",p->info);
+    free(p);
+}
+
+void deleteLast(){
+    struct node *p;
+    p=last;
+    if(first==NULL){
+        printf("list not exist:\t");
+        return ;
+            }
+            
+            if(first==last){
+                first=NULL;
+                last=NULL;
+                printf("Deleted node is \t: %d",p->info);
+                free(p);
+            }else{
+            last=last->pre;
+            last->next=NULL;
+            printf("Deleted node is \t: %d",p->info);
+            free(p);
+            }
+
+            
+}
+
+void delete_To_Give_Node(){
+    struct node *p,*prive;
+
+    p=first;
+    if(first=NULL){
+    printf("list not exist\t");
+    return ;
+    }
+    int x;
+    printf("Enter node value that you want to delete\t");
+    scanf("%d",&x);
+    while((p!=NULL)&&(p->info!=x)){
+        prive=p;
+        p=p->next;
+
+    }
+    if(p==NULL){
+        printf("node not exist:\t");
+        return  ;
+    }
+
+    if(p==first){
+        first=first->next;
+        first->pre=NULL;
+        printf("Deleted node :\t%d",p->info);
+        // free(p);
+    }
+
+    if(p==last){
+        last=last->pre;
+        last->next=NULL;
+        printf("Deleted node :\t%d",p->info);
+        // free(p);
+    }else{
+        prive->next=p->next;
+      
+        p->next->pre =prive;
+        prive->next=p;
+       
+        // p->pre=NULL;
+        printf("Deleted node :\t%d",p->info);
+        }
+
+        free(p);
 
 }
 
