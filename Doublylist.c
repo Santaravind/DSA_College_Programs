@@ -117,9 +117,9 @@ void taverse_backword(){
     if(last==NULL){
         printf("Node list not exixt ");
     }
-     printf("List items forword \t");
+     printf("List items backword \t");
     while(p!=NULL){
-        printf("%d->",p->info);
+        printf("%d -> ",p->info);
         p=p->pre;
     }
 
@@ -129,12 +129,12 @@ void taverse_backword(){
 void taverse_forword(){
     struct node *p=first;
   
-    if(last==NULL){
+    if(first==NULL){
         printf("Node list not exixt ");
     }
      printf("List items forword \t");
     while(p!=NULL){
-        printf("%d->",p->info);
+        printf("%d -> ",p->info);
         p=p->next;
     }
 }
@@ -264,7 +264,7 @@ void delete_To_Give_Node(){
     struct node *p,*prive;
 
     p=first;
-    if(first=NULL){
+    if(first==NULL){
     printf("list not exist\t");
     return ;
     }
@@ -284,27 +284,73 @@ void delete_To_Give_Node(){
     if(p==first){
         first=first->next;
         first->pre=NULL;
-        printf("Deleted node :\t%d",p->info);
-        // free(p);
-    }
-
-    if(p==last){
+        
+    }else if(p==last){
         last=last->pre;
         last->next=NULL;
-        printf("Deleted node :\t%d",p->info);
-        // free(p);
+        
     }else{
         prive->next=p->next;
       
-        p->next->pre =prive;
-        prive->next=p;
-       
-        // p->pre=NULL;
-        printf("Deleted node :\t%d",p->info);
+        p->next->pre =prive;    
+        
         }
 
+        printf("Deleted node :\t%d",p->info);
         free(p);
 
 }
+
+
+
+
+
+
+
+// void delete_To_Give_Node(){ 
+//     struct node *p, *prive; 
+//     p = first; 
+    
+//     // 1. Fix: Use == to check if empty
+//     if(first == NULL){ 
+//         printf("List is empty\n"); 
+//         return; 
+//     } 
+    
+//     int x; 
+//     printf("Enter node value that you want to delete: "); 
+//     scanf("%d", &x); 
+    
+//     // Find node
+//     while((p != NULL) && (p->info != x)){ 
+//         prive = p; 
+//         p = p->next; 
+//     } 
+    
+//     if(p == NULL){ 
+//         printf("Node not found\n"); 
+//         return; 
+//     } 
+    
+   
+//     if(p == first){ 
+//         first = first->next; 
+//         if(first != NULL) first->pre = NULL;
+//         else last = NULL;
+//     } 
+    
+//     else if(p == last){ 
+//         last = last->pre; 
+//         last->next = NULL; 
+//     } 
+    
+//     else { 
+//         prive->next = p->next; 
+//         p->next->pre = prive; // Connect forward node back
+//     } 
+    
+//     printf("Deleted node: %d\n", p->info); 
+//     free(p); 
+// }
 
 
