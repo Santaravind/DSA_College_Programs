@@ -208,6 +208,7 @@ void deletfirst(){
     }else{
         first=first->next;
     }
+    printf("\nDeleted node =%d ",p->info);
     free(p);
 }
 
@@ -232,6 +233,7 @@ void deletLast() {
     while (q->next != last) {
         q = q->next;
     }
+    printf("\nDelete node %d= ",q->info);
 
     free(last);
 
