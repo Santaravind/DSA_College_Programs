@@ -1,5 +1,6 @@
 #include<stdio.h>
 #include<conio.h>
+#include<stdlib.h>
 struct BST {
     int key;
     struct BST *left,*right,*parent;
@@ -8,11 +9,11 @@ struct BST {
 struct BST *root=NULL;
 
 void insert();
-void display();
+void InOrderDisplay(struct BST *);
 int main(){
     int x;
     while(1){
-    printf(" \nEnter 1 to push in queue \nEnter 2 pop form the queue\nEnter 3 For display the queue value\nEnter 4 for exit :-\nEnter value want to perform with queue:  ");
+    printf(" \nEnter 1 to Add element in BST \nEnter 2 inorder traversal from BST\nEnter 4 for exit :-\nEnter value want to perform with queue:  ");
     scanf("%d",&x);
     
        switch(x){
@@ -20,7 +21,7 @@ int main(){
         insert();
        break;
       case 2:
-       display();
+      InOrderDisplay(root);
        break;
 
        case 4:
@@ -40,7 +41,7 @@ int main(){
 void insert(){
     struct BST *q,*y,*x=NULL;
     q=(struct BST *)malloc(sizeof(struct BST));
-    printf("Enter the key value");
+    printf("Enter the key value :\t ");
     scanf("%d",&q->key);
     q->left=NULL;
     q->right=NULL;
@@ -68,12 +69,18 @@ void insert(){
 
 }
 
-void display(){
-    struct BST *p;
-    p=root;
-    if(p==NULL){
-        printf("BST not exixt");
-        return;
-    }
-     
+  void InOrderDisplay(struct BST *root){
+    // struct BST *p;
+    // p=root;
+    // if(p==NULL){
+    //     printf("BST not exixt\t");
+    //     return;
+    // }
+     if(root!=NULL){
+        InOrderDisplay(root->left);
+        printf("%d ", root->key);
+        InOrderDisplay(root->right);
+
+     }
+
 }
